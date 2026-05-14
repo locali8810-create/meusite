@@ -30,27 +30,32 @@
             min-height: 100vh;
         }
 
-        /* Animated Background */
-        .bg-gradient {
+        /* IMAGEM DE FUNDO REAL */
+        .bg-image {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: 
-                radial-gradient(circle at 20% 50%, rgba(220, 38, 38, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(153, 27, 27, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 40% 20%, rgba(248, 113, 113, 0.05) 0%, transparent 50%);
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/c/ce/Delta_Executor_Fivicon.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
             z-index: -2;
-            animation: pulseBg 8s ease-in-out infinite;
         }
 
-        @keyframes pulseBg {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
+        /* Overlay escuro pra não atrapalhar a leitura */
+        .bg-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.75);
+            z-index: -1;
         }
 
-        /* Grid Background */
+        /* Grid Background (mantido por cima da imagem) */
         .grid-bg {
             position: fixed;
             top: 0;
@@ -61,7 +66,8 @@
                 linear-gradient(rgba(220, 38, 38, 0.03) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(220, 38, 38, 0.03) 1px, transparent 1px);
             background-size: 50px 50px;
-            z-index: -1;
+            z-index: 0;
+            pointer-events: none;
         }
 
         /* Header */
@@ -71,6 +77,7 @@
             position: relative;
             border-bottom: 1px solid rgba(220, 38, 38, 0.3);
             background: linear-gradient(180deg, rgba(0,0,0,0.95) 0%, transparent 100%);
+            z-index: 1;
         }
 
         .logo {
@@ -118,6 +125,8 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 2rem;
+            position: relative;
+            z-index: 1;
         }
 
         /* Stats Bar */
@@ -381,6 +390,8 @@
             margin-top: 4rem;
             color: #555;
             font-size: 0.9rem;
+            position: relative;
+            z-index: 1;
         }
 
         footer a {
@@ -398,7 +409,10 @@
     </style>
 </head>
 <body>
-    <div class="bg-gradient"></div>
+    <!-- Imagem de fundo real do Delta Executor -->
+    <div class="bg-image"></div>
+    <!-- Overlay escuro pra não atrapalhar a leitura -->
+    <div class="bg-overlay"></div>
     <div class="grid-bg"></div>
 
     <header>
@@ -470,69 +484,51 @@
                         Jogar Agora
                     </a>
                 </div>
+
+                <!-- Script 4 -->
+                <div class="script-card">
+                    <div class="script-header">
+                        <div class="script-icon">⚡</div>
+                        <h3 class="script-title">Tycoon dos Deuses</h3>
+                    </div>
+                    <div class="script-code">loadstring(game:HttpGet("https://raw.githubusercontent.com/locali8810-create/Tycoon/refs/heads/main/Tycoon%20dos%20Deuses.txt"))()</div>
+                    <a href="https://www.roblox.com/pt/games/5310443220/GOD-TYCOON" target="_blank" class="play-button">
+                        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        Jogar Agora
+                    </a>
+                </div>
+
+                <!-- Script 5 -->
+                <div class="script-card">
+                    <div class="script-header">
+                        <div class="script-icon">🧀</div>
+                        <h3 class="script-title">Fuja do Queijo</h3>
+                    </div>
+                    <div class="script-code">loadstring(game:HttpGet("https://raw.githubusercontent.com/locali8810-create/Fuja-do-queijo/refs/heads/main/fuja%20do%20queijo.txt"))()</div>
+                    <a href="https://www.roblox.com/pt/games/5777099015/Cheese-Escape" target="_blank" class="play-button">
+                        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        Jogar Agora
+                    </a>
+                </div>
+
+                <!-- Script 6 -->
+                <div class="script-card">
+                    <div class="script-header">
+                        <div class="script-icon">🔪</div>
+                        <h3 class="script-title">MM2</h3>
+                    </div>
+                    <div class="script-code">loadstring(game:HttpGet("https://raw.githubusercontent.com/locali8810-create/MM2/refs/heads/main/MM2%20admin.txt"))()</div>
+                    <a href="https://www.roblox.com/pt/games/142823291/Murder-Mystery-2" target="_blank" class="play-button">
+                        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        Jogar Agora
+                    </a>
+                </div>
             </div>
         </div>
-<!-- Script 4 -->
-<div class="script-card">
-    <div class="script-header">
-        <div class="script-icon">⚡</div>
-        <h3 class="script-title">Tycoon dos Deuses</h3>
     </div>
-
-    <div class="script-code">
-loadstring(game:HttpGet("https://raw.githubusercontent.com/locali8810-create/Tycoon/refs/heads/main/Tycoon%20dos%20Deuses.txt"))()
-    </div>
-
-    <a href="https://www.roblox.com/pt/games/5310443220/GOD-TYCOON" target="_blank" class="play-button">
-        <svg viewBox="0 0 24 24">
-            <path d="M8 5v14l11-7z"/>
-        </svg>
-        Jogar Agora
-    </a>
-</div>
-
-<!-- Script 5 -->
-<div class="script-card">
-    <div class="script-header">
-        <div class="script-icon">🧀</div>
-        <h3 class="script-title">Fuja do Queijo</h3>
-    </div>
-
-    <div class="script-code">
-loadstring(game:HttpGet("https://raw.githubusercontent.com/locali8810-create/Fuja-do-queijo/refs/heads/main/fuja%20do%20queijo.txt"))()
-    </div>
-
-    <a href="https://www.roblox.com/pt/games/5777099015/Cheese-Escape" target="_blank" class="play-button">
-        <svg viewBox="0 0 24 24">
-            <path d="M8 5v14l11-7z"/>
-        </svg>
-        Jogar Agora
-    </a>
-</div>
-
-<!-- Script 6 -->
-<div class="script-card">
-    <div class="script-header">
-        <div class="script-icon">🔪</div>
-        <h3 class="script-title">MM2</h3>
-    </div>
-
-    <div class="script-code">
-loadstring(game:HttpGet("https://raw.githubusercontent.com/locali8810-create/MM2/refs/heads/main/MM2%20admin.txt"))()
-    </div>
-
-    <a href="https://www.roblox.com/pt/games/142823291/Murder-Mystery-2" target="_blank" class="play-button">
-        <svg viewBox="0 0 24 24">
-            <path d="M8 5v14l11-7z"/>
-        </svg>
-        Jogar Agora
-    </a>
-</div>
-    
 
     <footer>
         <p>© 2026 BRBox Hub. Todos os direitos reservados.</p>
-    
     </footer>
 
     <script>
@@ -563,4 +559,5 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/locali8810-create/MM2
         });
     </script>
 </body>
-                    </html>
+    </html>
+    
