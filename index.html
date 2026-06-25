@@ -2,562 +2,79 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BRBox Hub | Roblox Scripts</title>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>BRBOX HUB</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
-        :root {
-            --primary-red: #dc2626;
-            --dark-red: #991b1b;
-            --accent-red: #f87171;
-            --dark-bg: #0a0a0a;
-            --darker-bg: #050505;
-            --card-bg: #111111;
-            --glass: rgba(17, 17, 17, 0.9);
-        }
-
         body {
-            font-family: 'Inter', sans-serif;
-            background: var(--darker-bg);
-            color: #fff;
-            overflow-x: hidden;
+            background: linear-gradient(135deg, #0f0f0f 0%, #1a1a2e 50%, #0f0f0f 100%);
             min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 20px;
         }
-
-        /* IMAGEM DE FUNDO REAL */
-        .bg-image {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('https://upload.wikimedia.org/wikipedia/commons/c/ce/Delta_Executor_Fivicon.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            z-index: -2;
-        }
-
-        /* Overlay escuro pra não atrapalhar a leitura */
-        .bg-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.75);
-            z-index: -1;
-        }
-
-        /* Grid Background (mantido por cima da imagem) */
-        .grid-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                linear-gradient(rgba(220, 38, 38, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(220, 38, 38, 0.03) 1px, transparent 1px);
-            background-size: 50px 50px;
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        /* Header */
-        header {
-            padding: 2rem;
-            text-align: center;
-            position: relative;
-            border-bottom: 1px solid rgba(220, 38, 38, 0.3);
-            background: linear-gradient(180deg, rgba(0,0,0,0.95) 0%, transparent 100%);
-            z-index: 1;
-        }
-
-        .logo {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 3.5rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--primary-red), var(--accent-red));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-shadow: 0 0 40px rgba(220, 38, 38, 0.6);
-            letter-spacing: -2px;
-            position: relative;
-        }
-
-        .logo::after {
-            content: 'BRBOX (HUB)';
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 100%;
-            background: linear-gradient(135deg, var(--primary-red), #fff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            opacity: 0;
-            animation: shine 3s ease-in-out infinite;
-        }
-
-        @keyframes shine {
-            0%, 100% { opacity: 0; }
-            50% { opacity: 0.3; }
-        }
-
-        .tagline {
-            color: #666;
-            font-size: 1rem;
-            margin-top: 0.5rem;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-        }
-
-        /* Main Container */
         .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* Stats Bar */
-        .stats-bar {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 3rem;
-        }
-
-        .stat-card {
-            background: var(--glass);
-            border: 1px solid rgba(220, 38, 38, 0.3);
-            border-radius: 12px;
-            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px 30px;
+            max-width: 400px;
+            width: 100%;
             text-align: center;
             backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
         }
-
-        .stat-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(220, 38, 38, 0.1), transparent);
-            transition: left 0.5s;
+        .icon {
+            font-size: 60px;
+            margin-bottom: 20px;
         }
-
-        .stat-card:hover::before {
-            left: 100%;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary-red);
-            box-shadow: 0 10px 40px rgba(220, 38, 38, 0.3);
-        }
-
-        .stat-number {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: var(--primary-red);
-            text-shadow: 0 0 20px rgba(220, 38, 38, 0.5);
-        }
-
-        .stat-label {
-            color: #888;
-            font-size: 0.9rem;
-            margin-top: 0.3rem;
+        .title {
+            color: #ff4757;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 15px;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
         }
-
-        /* Scripts Section */
-        .scripts-section {
-            margin-top: 2rem;
+        .message {
+            color: #e0e0e0;
+            font-size: 16px;
+            line-height: 1.7;
+            margin-bottom: 25px;
         }
-
-        .section-title {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 2rem;
-            margin-bottom: 2rem;
-            color: #fff;
-            text-align: center;
-            position: relative;
+        .message strong {
+            color: #ff6b81;
         }
-
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 100px;
+        .divider {
+            width: 60px;
             height: 3px;
-            background: linear-gradient(90deg, transparent, var(--primary-red), transparent);
-            margin: 1rem auto 0;
+            background: linear-gradient(90deg, #ff4757, #ff6b81);
+            border-radius: 2px;
+            margin: 0 auto 25px auto;
         }
-
-        /* Script Cards Grid */
-        .scripts-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-        }
-
-        .script-card {
-            background: var(--card-bg);
-            border: 1px solid rgba(220, 38, 38, 0.2);
-            border-radius: 16px;
-            padding: 2rem;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
-
-        .script-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--primary-red), var(--accent-red));
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-        }
-
-        .script-card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(220, 38, 38, 0.5);
-            box-shadow: 0 20px 60px rgba(220, 38, 38, 0.2);
-        }
-
-        .script-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .script-header {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .script-icon {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, var(--primary-red), var(--dark-red));
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            box-shadow: 0 0 20px rgba(220, 38, 38, 0.4);
-        }
-
-        .script-title {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #fff;
-        }
-
-        .script-code {
-            background: rgba(0, 0, 0, 0.6);
-            border: 1px solid rgba(220, 38, 38, 0.2);
-            border-radius: 8px;
-            padding: 1rem;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.75rem;
+        .footer {
             color: #888;
-            word-break: break-all;
-            margin-bottom: 1.5rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .script-code::before {
-            content: '>';
-            color: var(--primary-red);
-            margin-right: 0.5rem;
-        }
-
-        .play-button {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            width: 100%;
-            padding: 1rem 2rem;
-            background: linear-gradient(135deg, var(--primary-red), var(--dark-red));
-            color: white;
-            text-decoration: none;
-            border-radius: 10px;
-            font-weight: 700;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .play-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s;
-        }
-
-        .play-button:hover::before {
-            left: 100%;
-        }
-
-        .play-button:hover {
-            transform: scale(1.02);
-            box-shadow: 0 10px 30px rgba(220, 38, 38, 0.5);
-            border-color: rgba(255,255,255,0.1);
-        }
-
-        .play-button svg {
-            width: 20px;
-            height: 20px;
-            fill: currentColor;
-        }
-
-        /* Discord CTA */
-        .discord-section {
-            margin-top: 4rem;
-            text-align: center;
-            padding: 3rem;
-            background: var(--card-bg);
-            border: 1px solid rgba(220, 38, 38, 0.2);
-            border-radius: 16px;
-            backdrop-filter: blur(10px);
-        }
-
-        .discord-title {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: #fff;
-        }
-
-        .discord-cta {
-            background: linear-gradient(135deg, #5865F2, #4752C4);
-            color: white;
-            padding: 1rem 2rem;
-            border-radius: 10px;
-            text-decoration: none;
-            font-weight: 700;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-            margin-top: 1rem;
-        }
-
-        .discord-cta:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(88, 101, 242, 0.4);
-            border-color: rgba(255,255,255,0.2);
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 3rem 2rem;
-            border-top: 1px solid rgba(220, 38, 38, 0.1);
-            margin-top: 4rem;
-            color: #555;
-            font-size: 0.9rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        footer a {
-            color: var(--accent-red);
-            text-decoration: none;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .logo { font-size: 2.5rem; }
-            .scripts-grid { grid-template-columns: 1fr; }
-            .stat-card { padding: 1rem; }
-            .script-card { padding: 1.5rem; }
+            font-size: 12px;
+            margin-top: 10px;
         }
     </style>
 </head>
 <body>
-    <!-- Imagem de fundo real do Delta Executor -->
-    <div class="bg-image"></div>
-    <!-- Overlay escuro pra não atrapalhar a leitura -->
-    <div class="bg-overlay"></div>
-    <div class="grid-bg"></div>
-
-    <header>
-        <h1 class="logo">BRBOX (HUB)</h1>
-        <p class="tagline">Roblox Scripts Repository</p>
-    </header>
-
     <div class="container">
-        <!-- Stats -->
-        <div class="stats-bar">
-            <div class="stat-card">
-                <div class="stat-number">6</div>
-                <div class="stat-label">Scripts Disponíveis</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">100%</div>
-                <div class="stat-label">Funcionando</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">ON</div>
-                <div class="stat-label">Status</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">146</div>
-                <div class="stat-label">Membros Discord</div>
-            </div>
+        <div class="icon">📦</div>
+        <div class="title">Fim do BRBOX HUB</div>
+        <div class="divider"></div>
+        <div class="message">
+            Infelizmente chegou o fim do <strong>BRBOX HUB</strong>.<br><br>
+            Os scripts não irão acabar! Vocês ainda vão receber scripts aqui pelo app.
         </div>
-
-        <!-- Scripts Section -->
-        <div class="scripts-section">
-            <h2 class="section-title">Scripts Disponíveis</h2>
-
-            <div class="scripts-grid">
-                <!-- Script 1 -->
-                <div class="script-card">
-                    <div class="script-header">
-                        <div class="script-icon">🥙</div>
-                        <h3 class="script-title">Scary Shawarma Kiosk</h3>
-                    </div>
-                    <div class="script-code">loadstring(game:HttpGet("https://raw.githubusercontent.com/locali8810-create/Scary/refs/heads/main/obfuscated_script-1775615260244.lua.txt"))()</div>
-                    <a href="https://www.roblox.com/pt/games/137826330724902/Scary-Shawarma-Kiosk-the-ANOMALY" target="_blank" class="play-button">
-                        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                        Jogar Agora
-                    </a>
-                </div>
-
-                <!-- Script 2 -->
-                <div class="script-card">
-                    <div class="script-header">
-                        <div class="script-icon">🕷️</div>
-                        <h3 class="script-title">Spider</h3>
-                    </div>
-                    <div class="script-code">loadstring(game:HttpGet("https://raw.githubusercontent.com/locali8810-create/Aranha/refs/heads/main/obfuscated_script-1775613548537.lua.txt"))()</div>
-                    <a href="https://www.roblox.com/pt/games/5118969548/Spider" target="_blank" class="play-button">
-                        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                        Jogar Agora
-                    </a>
-                </div>
-
-                <!-- Script 3 -->
-                <div class="script-card">
-                    <div class="script-header">
-                        <div class="script-icon">👋</div>
-                        <h3 class="script-title">INSANE Troll Slap Tower</h3>
-                    </div>
-                    <div class="script-code">loadstring(game:HttpGet("https://raw.githubusercontent.com/locali8810-create/BR/refs/heads/main/obfuscated_script-1775583597403.html"))()</div>
-                    <a href="https://www.roblox.com/pt/games/110470672231288/INSANE-Troll-Slap-Tower" target="_blank" class="play-button">
-                        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                        Jogar Agora
-                    </a>
-                </div>
-
-                <!-- Script 4 -->
-                <div class="script-card">
-                    <div class="script-header">
-                        <div class="script-icon">⚡</div>
-                        <h3 class="script-title">Tycoon dos Deuses</h3>
-                    </div>
-                    <div class="script-code">loadstring(game:HttpGet("https://raw.githubusercontent.com/locali8810-create/Tycoon/refs/heads/main/Tycoon%20dos%20Deuses.txt"))()</div>
-                    <a href="https://www.roblox.com/pt/games/5310443220/GOD-TYCOON" target="_blank" class="play-button">
-                        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                        Jogar Agora
-                    </a>
-                </div>
-
-                <!-- Script 5 -->
-                <div class="script-card">
-                    <div class="script-header">
-                        <div class="script-icon">🧀</div>
-                        <h3 class="script-title">Fuja do Queijo</h3>
-                    </div>
-                    <div class="script-code">loadstring(game:HttpGet("https://raw.githubusercontent.com/locali8810-create/Fuja-do-queijo/refs/heads/main/fuja%20do%20queijo.txt"))()</div>
-                    <a href="https://www.roblox.com/pt/games/5777099015/Cheese-Escape" target="_blank" class="play-button">
-                        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                        Jogar Agora
-                    </a>
-                </div>
-
-                <!-- Script 6 -->
-                <div class="script-card">
-                    <div class="script-header">
-                        <div class="script-icon">🔪</div>
-                        <h3 class="script-title">MM2</h3>
-                    </div>
-                    <div class="script-code">loadstring(game:HttpGet("https://raw.githubusercontent.com/locali8810-create/MM2/refs/heads/main/MM2%20admin.txt"))()</div>
-                    <a href="https://www.roblox.com/pt/games/142823291/Murder-Mystery-2" target="_blank" class="play-button">
-                        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                        Jogar Agora
-                    </a>
-                </div>
-            </div>
-        </div>
+        <div class="footer">Obrigado por tudo! 💜</div>
     </div>
-
-    <footer>
-        <p>© 2026 BRBox Hub. Todos os direitos reservados.</p>
-    </footer>
-
-    <script>
-        // Animate stats on load
-        document.addEventListener('DOMContentLoaded', () => {
-            const statNumbers = document.querySelectorAll('.stat-number');
-            statNumbers.forEach((stat, index) => {
-                stat.style.opacity = '0';
-                stat.style.transform = 'translateY(20px)';
-                setTimeout(() => {
-                    stat.style.transition = 'all 0.6s ease';
-                    stat.style.opacity = '1';
-                    stat.style.transform = 'translateY(0)';
-                }, index * 100);
-            });
-
-            // Animate cards
-            const cards = document.querySelectorAll('.script-card');
-            cards.forEach((card, index) => {
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(30px)';
-                setTimeout(() => {
-                    card.style.transition = 'all 0.6s ease';
-                    card.style.opacity = '1';
-                    card.style.transform = 'translateY(0)';
-                }, 300 + index * 150);
-            });
-        });
-    </script>
 </body>
-    </html>
-    
+</html>
